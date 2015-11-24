@@ -2,15 +2,15 @@
 Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but some are also solved in C++.
 
 1. Think Twice
-- Problem:
++ Problem:
     - Given an unreadable string and three hints, decode the message.
-- Hints:
++ Hints:
     - 'What about making trans?
-    - A photo
+    - A photo:
         + K --> M
         + O --> Q
         + E --> G
-- Solution:
++ Solution:
 The solution suggests using string.maketrans().  This works, but it
 requires a translation table.
 
