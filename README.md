@@ -1,7 +1,7 @@
 # pychallenge
 Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but some are also solved in C++.
 
-1. map
+1. map (aka think_twice)
     - Problem:
         - Given an unreadable string and some hints, decode the message.
     - Hints:
@@ -26,7 +26,9 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
     - Hints:
         - 'find rare characters in the mess below:'
     - Solution:
-        Count the characters in the text block. The answer is the characters used once in the order they appear.
+        - Count the characters in the text block.
+        - The answer is the characters used once in the order they appear.
+        - Answer: equality
 
 3. equality
     - Problem:
@@ -38,6 +40,7 @@ each of its sides.
     - Solution:
         - Use a RE to find the matches.
         - [^A-Z]+[A-Z]{3}([a-z])[A-Z]{3}[^A-Z]+
+        - Answer: linkedlist
 
 4. linkedlist
     - Problem: Start at a url and follow the links until the end. There are a couple of special cases to handle with re.
@@ -48,6 +51,7 @@ each of its sides.
         - The starting link is 12345"
     - Solution:
         - Use requests to tranverse the links. Use re to find the next link.
+        - Answer: peak
 
 5. peak
     - Problem:
@@ -91,6 +95,22 @@ each of its sides.
         - The gray blocks have some information.
         - Find them. Being gray, they each have equal values for red, green and blue.
         - The gray values map to ASCII characters. Use chr() to convert to a character.
-        - Note: The blocks each have many pixels, horizontally and vertically (it is a block). This leads to repeating pixels. Attempting to dedup can cause issues.
+        - Note: The blocks each have many pixels, horizontally and vertically (it is a block). This leads to repeating strings and characters within the strings. Attempting to dedup can cause issues. Take care with strings like 110 which could be incorrectly deduped to 10. 
+        - Answer: integrity
+
+8. integrity
+    - Problem:
+        - We have a picture of a bee with a hyperlink. When clicked, we a prompted for credentials.
+    - Hints:
+        - The page source contains:
+            - un: 'BZh91AY&SYA\xaf\x82\r\x00\x00\x01\x01\x80\x02\xc0\x02\x00 \x00!\x9ah3M\x07<]\xc9\x14\xe1BA\x06\xbe\x084'
+            - pw: 'BZh91AY&SY\x94$|\x0e\x00\x00\x00\x81\x00\x03$ \x00!\x9ah3M\x13<]\xc9\x14\xe1BBP\x91\xf08'
+    - Solution:
+        - The un and pw strings start with 'BZ'. They are compressed with bzip compression.
+        - Use the bz2 module to decompress each. Print the results.
+        - Answer:
+            - user  : huge
+            - passwd: file
+
 
 

@@ -26,6 +26,7 @@ def follow_file(zfile, name, comments=None):
     Each file points to the next and has a comment.
     Collect the comment. Follow to the next file recursively.
     """
+    # The first call, before the recursion starts, needs to create this list.
     if comments is None:
         comments = []
 
