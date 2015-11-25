@@ -113,7 +113,7 @@ each of its sides.
             - passwd: file
             - Authentication leads to good.html
 
-9 good
+9. good
     - Problem:
         - We have a picture of a mountain view over water.
         - There are some seeminly randomly placed black dots.
