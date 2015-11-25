@@ -19,10 +19,7 @@ def main():
     if not response.status_code == 200:
         print('Error: Request for banner.p failed')
     else:
-        # print(response.text)
         data = pickle.loads(response.text)
-        # for line in data:
-        #     print(line)
         for line in data:
             print(''.join([atom[0] * atom[1] for atom in line]))
 

@@ -54,12 +54,24 @@ each of its sides.
         - The page source implies there is a source file to get. Figure out what to do with it.
     - Hints:
         - peakhell src="banner.p
-        - peakhell sounds a bit like pickle, but this wasnt so obvious.
+        - peakhell sounds a bit like pickle, but this was not so obvious.
     - Solution:
         - Use requests to get banner.p.
         - Figure out it is a pickle file.
         - Demarshal the file using the pickle module.
         - Print the text.  It contains lines of tuples (# or a space, multiplier), readable once printed.
+
+6. channel
+    - Problem:
+        - Look at the source and realize that the zip module is required.
+    - Hints:
+        - The picture is of a zipper.
+        - start from 90052.
+        - answer is inside the zip.
+    - Solution:
+        - Use requests to download channel.zip.
+
+
 
 
 
