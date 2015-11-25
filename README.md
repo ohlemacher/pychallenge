@@ -27,3 +27,14 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
         - 'find rare characters in the mess below:'
     - Solution:
         Count the characters in the text block. The answer is the characters used once in the order they appear.
+
+3. equality
+    - Problem:
+        - Find characters a block of text that are 
+    - Hints:
+        - RE
+        - One small letter, surrounded by EXACTLY three big bodyguards on 
+each of its sides.
+    - Solution:
+        - Use a RE to find the matches.
+        - [^A-Z]+[A-Z]{3}([a-z])[A-Z]{3}[^A-Z]+
