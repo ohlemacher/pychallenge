@@ -95,7 +95,7 @@ each of its sides.
         - The gray blocks have some information.
         - Find them. Being gray, they each have equal values for red, green and blue.
         - The gray values map to ASCII characters. Use chr() to convert to a character.
-        - Note: The blocks each have many pixels, horizontally and vertically (it is a block). This leads to repeating strings and characters within the strings. Attempting to dedup can cause issues. Take care with strings like 110 which could be incorrectly deduped to 10. 
+        - Note: The blocks each have many pixels, horizontally and vertically (it is a block). This leads to repeating strings and characters within the strings. Attempting to dedup can cause issues. Take care with strings like 110 which could be incorrectly deduped to 10.
         - Answer: integrity
 
 8. integrity
@@ -111,6 +111,21 @@ each of its sides.
         - Answer:
             - user  : huge
             - passwd: file
+            - Authentication leads to good.html
 
-
+9 good
+    - Problem:
+        - We have a picture of a mountain view over water.
+        - There are some seeminly randomly placed black dots.
+    - Hints:
+        - Connect the dots
+        - Page source contains:
+            - first+second=?
+            - Two strings of numbers named first and second. They have different lengths.
+    - Solution:
+        - first and second are of diffent lengths so they cannot be coordinates used together.
+        - The are instead two lines. The numbers are coordinates concatenated.
+        - Use zip() to create a list of coordinate tuples for both first and second.
+        - Use the PIL library to draw both lines.
+        - Answer: The lines form the outline of a cow but it has horns so it is really a bull.
 
