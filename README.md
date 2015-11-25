@@ -60,6 +60,7 @@ each of its sides.
         - Figure out it is a pickle file.
         - Demarshal the file using the pickle module.
         - Print the text.  It contains lines of tuples (# or a space, multiplier), readable once printed.
+        - Answer: channel
 
 6. channel
     - Problem:
@@ -74,7 +75,22 @@ each of its sides.
         - Collect each file's comments while following.
         - Stop recursive calls once an interesting file is found.
         - Print the comments.
+        - Comments are a banner: HOCKEY.
+            - Another hint: 'it's in the air. look at the letters.'
+            - The banner is formed from the banner characters.
+            - Answer: oxygen
 
-
+7. oxygen
+    - Problem:
+        - A picture of a stream with a line of gray blocks varying in intensity.
+    - Hints:
+        - Page title is 'smarty'.
+    - Solution:
+        - Get the image using requests.
+        - Use the mahotas image processing library to create a numpy ndarray with the pixel data.
+        - The gray blocks have some information.
+        - Find them. Being gray, they each have equal values for red, green and blue.
+        - The gray values map to ASCII characters. Use chr() to convert to a character.
+        - Note: The blocks each have many pixels, horizontally and vertically (it is a block). This leads to repeating pixels. Attempting to dedup can cause issues.
 
 
