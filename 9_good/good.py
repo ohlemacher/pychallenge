@@ -55,17 +55,17 @@ def explore():
               77,155,81,148,87,140,96,138,105,141,110,136,111,126,113,129,118,117,128,114,137,115,146,114,155,115, \
               158,121,157,128,156,134,157,136,156,136'
 
-    # Create lists of ints
+    # Create lists of ints [x0, y0, x1, y1...]
     first_list = [int(x) for x in first.split(',')]
     second_list = [int(x) for x in second.split(',')]
-
-    # Create something we can draw lines on
-    img = Image.open('./good.jpg')
-    draw = ImageDraw.Draw(img)
 
     # Create lists of coordinates
     first_line = zip(first_list[0::2], first_list[1::2])
     second_line = zip(second_list[0::2], second_list[1::2])
+
+    # Create something we can draw on
+    img = Image.open('./good.jpg')
+    draw = ImageDraw.Draw(img)
 
     # Draw lines on the image using the coordinates
     draw.line(first_line, fill=(255, 0, 255), width=1)  # magenta body
