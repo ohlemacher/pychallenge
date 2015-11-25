@@ -45,8 +45,21 @@ each of its sides.
         - follow the chain
         - urllib may help. DON'T TRY ALL NOTHINGS, since it will never end.
         - 400 times is more than enough.
-        - linkedlist.php?nothing=12345"
+        - The starting link is 12345"
     - Solution:
         - Use requests to tranverse the links. Use re to find the next link.
 
 5. peak
+    - Problem:
+        - The page source implies there is a source file to get. Figure out what to do with it.
+    - Hints:
+        - peakhell src="banner.p
+        - peakhell sounds a bit like pickle, but this wasnt so obvious.
+    - Solution:
+        - Use requests to get banner.p.
+        - Figure out it is a pickle file.
+        - Demarshal the file using the pickle module.
+        - Print the text.  It contains lines of tuples (# or a space, multiplier), readable once printed.
+
+
+
