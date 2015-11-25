@@ -18,7 +18,7 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
 
         I had considered using a dictionary for the table, but felt it makes reusability much harder. If the mapping K--> M changed to something else like K --> P, then a new table is required.
 
-        One could write a function to generate the translation table.  This would be quite useful if the input strings were VERY large. At least I think so. This could be profiled. shift_ord() is almost ready to do this.
+        One could write a function to generate the map or translation table. This would be quite useful if the input strings were VERY large. At least I think so. Profiling would determine this. shift_ord() is almost ready to do this.
 
 2. ocr
     - Problem:
@@ -63,14 +63,17 @@ each of its sides.
 
 6. channel
     - Problem:
-        - Look at the source and realize that the zip module is required.
+        - Look at the picture and source and realize that a zip file must be downloaded and analyzed.
     - Hints:
         - The picture is of a zipper.
         - start from 90052.
         - answer is inside the zip.
     - Solution:
         - Use requests to download channel.zip.
-
+        - Use recursion to follow each file in the zip file to the next.
+        - Collect each file's comments while following.
+        - Stop recursive calls once an interesting file is found.
+        - Print the comments.
 
 
 
