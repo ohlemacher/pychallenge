@@ -11,14 +11,14 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
             + O --> Q
             + E --> G
     - Solution:
-        The solution suggests using string.maketrans().  This works, but it
-        requires a translation table.
+        The solution suggests using string.maketrans().  This works, but it requires a translation table.
 
         It also seems to have issues in Python 3. string.maketrans was deprecated and then removed.  Strings are not bytes. They are Unicode.
 
         I had considered using a dictionary for the table, but felt it makes reusability much harder. If the mapping K--> M changed to something else like K --> P, then a new table is required.
 
         One could write a function to generate the map or translation table. This would be quite useful if the input strings were VERY large. At least I think so. Profiling would determine this. shift_ord() is almost ready to do this.
+        Answer: ocr
 
 2. ocr
     - Problem:
@@ -123,9 +123,13 @@ each of its sides.
             - first+second=?
             - Two strings of numbers named first and second. They have different lengths.
     - Solution:
-        - first and second are of diffent lengths so they cannot be coordinates used together.
-        - The are instead two lines. The numbers are coordinates concatenated.
+        - first and second are of different lengths so they cannot be coordinates used together.
+        - They are instead represent two lines. The numbers are coordinates concatenated, e.g. [x0, y0, x1, y1...].
         - Use zip() to create a list of coordinate tuples for both first and second.
         - Use the PIL library to draw both lines.
         - Answer: The lines form the outline of a cow but it has horns so it is really a bull.
 
+10. bull
+    - Problem:
+    - Hints:
+    - Solution:
