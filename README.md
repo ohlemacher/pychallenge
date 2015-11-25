@@ -45,6 +45,8 @@ each of its sides.
         - follow the chain
         - urllib may help. DON'T TRY ALL NOTHINGS, since it will never end.
         - 400 times is more than enough.
-        - <a href="linkedlist.php?nothing=12345">
+        - linkedlist.php?nothing=12345"
+    - Solution:
+        - Use requests to tranverse the links. Use re to find the next link.
 
 5. peak
