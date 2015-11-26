@@ -1,3 +1,4 @@
+
 # pychallenge
 Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but some are also solved in C++.
 
@@ -50,7 +51,7 @@ each of its sides.
         - 400 times is more than enough.
         - The starting link is 12345"
     - Solution:
-        - Use requests to tranverse the links. Use re to find the next link.
+        - Use requests to traverse the links. Use re to find the next link.
         - Answer: peak
 
 5. peak
@@ -116,7 +117,7 @@ each of its sides.
 9. good
     - Problem:
         - We have a picture of a mountain view over water.
-        - There are some seeminly randomly placed black dots.
+        - There are some seemingly randomly placed black dots.
     - Hints:
         - Connect the dots
         - Page source contains:
@@ -124,14 +125,15 @@ each of its sides.
             - Two strings of numbers named first and second. They have different lengths.
     - Solution:
         - first and second are of different lengths so they cannot be coordinates used together.
-        - They are instead represent two lines. The numbers are coordinates concatenated, e.g. [x0, y0, x1, y1...].
+        - They are instead represent two lines. The numbers are coordinates concatenated, e.g. [x, y0, x1, y1...].
         - Use zip() to create a list of coordinate tuples for both first and second.
         - Use the PIL library to draw both lines.
+        - The black dots are a red herring.
         - Answer: The lines form the outline of a cow but it has horns so it is really a bull.
 
 10. bull (Python and C++)
     - Problem: After examining a sequence of integers, determine the length of the 30th iteration.
-    - "The stupidist problem you could concievably imagine, that led to the most complicated answer you could concievablely imagine." -- John Conway
+    - "The stupidest problem you could conceivably imagine, that led to the most complicated answer you could conceivably imagine." -- John Conway
     - Conway's constant: 1.303577269
         - a[n+1] ~= a[n]**conways_constant
     - See: https://www.youtube.com/watch?v=ea7lJkEhytA
@@ -139,9 +141,8 @@ each of its sides.
         - a = [1, 11, 21, 1211, 111221,
     - Solution:
         - I had no idea what this sequence was and had to google it, though I had first guessed wrongly that the numbers were in base 3.
-        - Turns out this is the look-say sequence
+        - Turns out this is the look-say sequence which was developed by John Conway.
     - Solution:
         - Use regex to find the numbers that match "^(%s+)". Do this in a for loop sliding through the number. As you slide, skip the repeats.
         - Create the next iteration by writing the length and the number as you slide.
         - Answer: 5808
-
