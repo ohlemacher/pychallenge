@@ -129,7 +129,19 @@ each of its sides.
         - Use the PIL library to draw both lines.
         - Answer: The lines form the outline of a cow but it has horns so it is really a bull.
 
-10. bull
-    - Problem:
+10. bull (Python and C++)
+    - Problem: After examining a sequence of integers, determine the length of the 30th iteration.
+    - "The stupidist problem you could concievably imagine, that led to the most complicated answer you could concievablely imagine." -- John Conway
+    - Conway's constant: 1.303577269
+        - a[n+1] ~= a[n]**conways_constant
+    - See: https://www.youtube.com/watch?v=ea7lJkEhytA
     - Hints:
+        - a = [1, 11, 21, 1211, 111221,
     - Solution:
+        - I had no idea what this sequence was and had to google it, though I had first guessed wrongly that the numbers were in base 3.
+        - Turns out this is the look-say sequence
+    - Solution:
+        - Use regex to find the numbers that match "^(%s+)". Do this in a for loop sliding through the number. As you slide, skip the repeats.
+        - Create the next iteration by writing the length and the number as you slide.
+        - Answer: 5808
+
