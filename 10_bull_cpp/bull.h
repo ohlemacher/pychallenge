@@ -1,9 +1,7 @@
 
 class Bull {
 public:
-    Bull(void);
-    virtual ~Bull();
-
-    std::string lookAndSay(int seed);
+    std::string lookAndSay(std::string seed);
+    int lenAfterNIters(int iterations);
 };
 
