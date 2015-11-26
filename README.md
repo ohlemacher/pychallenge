@@ -142,7 +142,6 @@ each of its sides.
     - Solution:
         - I had no idea what this sequence was and had to google it, though I had first guessed wrongly that the numbers were in base 3.
         - Turns out this is the look-say sequence which was developed by John Conway.
-    - Solution:
         - Use regex to find the numbers that match "^(%s+)". Do this in a for loop sliding through the number. As you slide, skip the repeats.
         - Create the next iteration by writing the length and the number as you slide.
         - Answer: 5808
