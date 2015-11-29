@@ -149,6 +149,6 @@ each of its sides.
 11. 5808
     - Problem:
         - Given this image, find the solution.
-          ![alt text](https://github.com/ohlemacher/images/5808.png "5808")
+          ![alt text](https://raw.githubusercontent.com/ohlemacher/pychallenge/master/images/5808.png "5808")
     - Hints:
     - Solution:
