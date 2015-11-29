@@ -145,3 +145,10 @@ each of its sides.
         - Use regex to find the numbers that match "^(%s+)". Do this in a for loop sliding through the number. As you slide, skip the repeats.
         - Create the next iteration by writing the length and the number as you slide.
         - Answer: 5808
+
+11. 5808
+    - Problem:
+        - Given this image, find the solution.
+          ![alt text](https://github.com/ohlemacher/images/5808.png "5808")
+    - Hints:
+    - Solution:
