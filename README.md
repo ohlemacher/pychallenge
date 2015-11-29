@@ -151,4 +151,7 @@ each of its sides.
         - Given this image, find the solution.
           ![alt text](https://raw.githubusercontent.com/ohlemacher/pychallenge/master/images/5808.png "5808")
     - Hints:
+        - Page title: odd_even
     - Solution:
+        - odd_even is pretty big hint.  Remove the odd lines and rows. Using a numpy array makes it trivial. Once you have the ndarray via mahotas, the solution is one line: img_even = img[::2, ::2]
+          ![alt text](https://raw.githubusercontent.com/ohlemacher/pychallenge/master/images/5808_evil.png "5808")
