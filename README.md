@@ -12,13 +12,13 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
             + O --> Q
             + E --> G
     - Solution:
-        The solution suggests using string.maketrans().  This works, but it requires a translation table.
-
-        It also seems to have issues in Python 3. string.maketrans was deprecated and then removed.  Strings are not bytes. They are Unicode.
+        The hint suggests using string.maketrans().  This works, but it requires a translation table that would work for only one shift value.  It also seems to have issues in Python 3. string.maketrans was deprecated and then removed.  Strings are not bytes. They are Unicode.
 
         I had considered using a dictionary for the table, but felt it makes reusability much harder. If the mapping K--> M changed to something else like K --> P, then a new table is required.
 
-        One could write a function to generate the map or translation table. This would be quite useful if the input strings were VERY large. At least I think so. Profiling would determine this. shift_ord() is almost ready to do this.
+        One could write a function to generate the map or translation table. This would be quite useful if the input strings were VERY large. At least I think so. Profiling would be required. 
+
+        Instead, I used string.ascii_lowercase, string.find() and a simple algo to shift and wrap that supports negative shifts.
         Answer: ocr
 
 2. ocr
@@ -28,7 +28,9 @@ Solutions for pythonchallenge.com puzzles.   Most are implemented in Python, but
         - 'find rare characters in the mess below:'
     - Solution:
         - Count the characters in the text block.
-        - The answer is the characters used once in the order they appear.
+        - The answer is the characters used only once in the order they appear.
+        - Used a dictionary {[char: count]} to collect the counts, then sorted the dictionary
+            - sorted(dic.items(), key=operator.itemgetter(1))
         - Answer: equality
 
 3. equality
@@ -58,7 +60,7 @@ each of its sides.
     - Problem:
         - The page source implies there is a source file to get. Figure out what to do with it.
     - Hints:
-        - peakhell src="banner.p
+        - peakhell src="banner.p"
         - peakhell sounds a bit like pickle, but this was not so obvious.
     - Solution:
         - Use requests to get banner.p.
@@ -155,3 +157,21 @@ each of its sides.
     - Solution:
         - odd_even is pretty big hint.  Remove the odd lines and rows. Using a numpy array makes it trivial. Once you have the ndarray via mahotas, the solution is one line: img_even = img[::2, ::2]
           ![alt text](https://raw.githubusercontent.com/ohlemacher/pychallenge/master/images/5808_evil.png "5808")
+        - Answer: evil
+
+12. evil
+    - Problem: Given the image named 'evil1.jpg', find the solution. The image is of someone dealing cards.
+    - Hints:
+        - There is a one in the image name.
+        - Dealing cards is a small hint.
+        - On the back of each card are two sickle shapes.
+    - Solution:
+        - Since there is an evil1.jpg, try evil2.jpg. It exists and says 'not jpg - .gfx'
+        - evil2.gfx is not a standard graphics format. The _file_ command reports it as data. _xxd evil2.gfx | head_ shows there is a jpeg magic number.
+        - Using the solution to 5808, guess that there are images muxed together.
+        - Create individual data lists each skipping starting with a different offset.  After some experimentation, the offset is found to be five. Therefore we need five lists of bytes.
+        - Look at the head of each list to determine its image format. Set the extension and create the files.
+        - Display each file.
+        - Catch errors. It turns out that image 3.png contains a compression error and results in a TypeError exception. Handle exceptions.  gimp can display the top half of 3.png.  pylab cannot.
+        - Answer: dis + pro + port + ional + !ity = disproportional
+
