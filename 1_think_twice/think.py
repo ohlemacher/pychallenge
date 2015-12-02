@@ -22,50 +22,43 @@ quite useful if the input strings were VERY large. At least I think so. This
 could be profiled. shift_ord() is almost doing this.
 '''
 
-def shift_ord(ch, shift_n):
-    '''Shift a character.'''
-    assert shift_n < 26
-    ch_ord = ord(ch)
-    ch_sh = ord(ch) + shift_n
+import string
 
-    # Return char if outside the alphabet range
-    if (ch_ord < ord('A')) or \
-            (ch_ord > ord('Z') and ch_ord < ord('a')) or \
-            (ch_ord > ord('z')):
-        ch_shifted = ch
-    # Return shifted ch handling wrapping
+def shift_ord(cha, shift_n):
+    '''
+    Shift a character shift_n places wrapping as required.
+    Shifts may be positive or negative.
+    '''
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    cha_shifted = cha  # If not in lower, nor in upper, then no shift
 
-    # ABCDZ #$% abcdz %^&
-    else:
-        if ch_sh > ord('z'):
-            delta = ch_sh - ord('z')
-            ch_shifted = chr(ord('a') + delta - 1)
-        elif ch_sh > ord('Z') and ch_sh < ord('a'):
-            delta = ch_sh - ord('Z')
-            ch_shifted = chr(ord('A') + delta)
-        else:
-            ch_shifted = chr(ch_sh)
+    if cha in lower:
+        idx = lower.find(cha)
+        if shift_n < 0:  # Handle wrapping before a
+            while idx - shift_n < 0:
+                idx += 26
+        cha_shifted = lower[(idx + shift_n) % 26]  # Use % for wrapping past z
+    elif cha in upper:
+        idx = upper.find(cha)
+        if shift_n < 0:  # Handle wrapping before A
+            while idx - shift_n < 0:
+                idx += 26
+        cha_shifted = upper[(idx + shift_n) % 26]  # Use % for wrapping past Z
+    return cha_shifted
 
-    return ch_shifted
-
-def shift_msg(msg, shift):
-    '''Run through the message and shift each character.'''
-    msg_shifted = ''
-    for ch in msg:
-        msg_shifted += shift_ord(ch, shift)
-    return msg_shifted
-
-def explore():
+def explore(msg, shift):
     '''Find a solution.'''
+    msg_shifted = ''.join([shift_ord(cha, shift) for cha in msg])
+
+    print '\nEncrypted message:'
+    print msg_orig
+    print '\nDecrypted message:'
+    print msg_shifted
+
+if __name__ == '__main__':
     msg_orig = \
         "g fmnc wms bgblr rpylqjyrc gr zw fylb. " + \
         "rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr" + \
         "ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
-    msg_shifted = shift_msg(msg_orig, 2)
-
-    print msg_orig
-    print '\nShifted solution:'
-    print msg_shifted
-
-if __name__ == '__main__':
-    explore()
+    explore(msg_orig, 2)
