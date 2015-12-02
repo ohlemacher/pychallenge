@@ -7,6 +7,8 @@ Given an unreadable string and three hints, decode the message.
 3. E --> G
 
 Solution:
+This is Ceasar's cypher.
+
 The solution suggests using string.maketrans().  This works, but it
 requires a translation table.
 
@@ -26,7 +28,7 @@ import string
 
 def shift_ord(cha, shift_n):
     '''
-    Shift a character shift_n places wrapping as required.
+    Shift a character in the range [a-z] or [A-Z] N places wrapping as required.
     Shifts may be positive or negative.
     '''
     lower = string.ascii_lowercase
