@@ -44,6 +44,7 @@ def write_least_used_in_order_used(least_list):
     This produces an outfile with all the characters
     used only once and in order of appearance.
     '''
+    print '--->', least_list
     with open('ocr.out', 'w') as outfile, open('ocr_data.txt', 'r') as infile:
         for line in infile:
             for cha in line:

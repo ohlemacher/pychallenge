@@ -54,7 +54,7 @@ def explore(msg, shift):
     msg_shifted = ''.join([shift_ord(cha, shift) for cha in msg])
 
     print '\nEncrypted message:'
-    print msg_orig
+    print msg
     print '\nDecrypted message:'
     print msg_shifted
 

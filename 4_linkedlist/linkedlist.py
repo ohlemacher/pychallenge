@@ -14,7 +14,7 @@ def get_next_link(url, link):
         print("Error: Failed to get next nothing at %s%s" % (url, link))
         sys.exit(1)
     content = response.content
-    print('content:', content)
+    # print('content:', content)
 
     # Match 'nothing is <some number>'
     match = re.search('nothing is ([0-9]+)', content)
@@ -30,8 +30,8 @@ def get_next_link(url, link):
         else:
             print('An interesting link was found:', )
             print('\t', content)
-            sys.exit(2)
-    print("%s --> %s" % (link, next_link))
+            sys.exit(0)
+    # print("%s --> %s" % (link, next_link))
     return next_link
 
 def explore():

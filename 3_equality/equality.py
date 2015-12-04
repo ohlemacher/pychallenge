@@ -7,24 +7,7 @@ characters on each side.
 
 import pprint
 import re
-
-def is_big(cha):
-    '''Is cha an upper case letter?'''
-    ord_A = ord('A')
-    ord_Z = ord('Z')
-    ord_ch = ord(cha)
-    if ord_ch >= ord_A and ord_ch <= ord_Z:
-        return True
-    return False
-
-def is_small(cha):
-    '''Is cha a lower case letter?'''
-    ord_a = ord('a')
-    ord_z = ord('z')
-    ord_ch = ord(cha)
-    if ord_ch >= ord_a and ord_ch <= ord_z:
-        return True
-    return False
+import unittest
 
 def file_to_string():
     '''Read the file into a string.'''
@@ -36,12 +19,63 @@ def file_to_string():
                     strg += cha
     return strg
 
+def find_guarded_matches(strg):
+    '''
+    Use a regex to find the guarded chars.
+    '''
+    guard_re = re.compile(r"""
+                          (^|[^A-Z]{1}) # Beginning or 3 non-uppercase
+                          [A-Z]{3}      # Three uppercase (guard)
+                          ([a-z]{1})    # One lowercase
+                          [A-Z]{3}      # Three uppercase (guard)
+                          ($|[^A-Z]{1}) # End or 3 non-uppercase
+                          """,
+                          re.VERBOSE)
+    matches = guard_re.findall(strg)
+
+    # Since three groups are used in the regex, tuples are returned.
+    # We only want the middle one.
+    answer = ''
+    for tup in matches:
+        answer += tup[1]
+    return answer
+
 def explore():
-    '''Find the solution'''
+    '''Find the solution. Run iteractively.'''
     strg = file_to_string()
-    matches = re.findall('[^A-Z]+[A-Z]{3}([a-z])[A-Z]{3}[^A-Z]+', strg)
-    pprint.pprint(''.join(matches))
+    print find_guarded_matches(strg)
+
+class EqualityTest(unittest.TestCase):
+    '''Unit test set.'''
+    def test_start_match(self):
+        '''Test match at start of strg.'''
+        strg = "AAAxBBBooCCCyDDDo"
+        answer = 'xy'
+        result = find_guarded_matches(strg)
+        self.failUnless(result==answer)
+
+    def test_middle_match(self):
+        '''Test match in middle of strg.'''
+        strg = "mNoAAAxBBBooCCCyDDDmNo"
+        answer = 'xy'
+        result = find_guarded_matches(strg)
+        self.failUnless(result==answer)
+
+    def test_end_match(self):
+        '''Test match at end of strg.'''
+        strg = "ooAAAxBBBooCCCyDDD"
+        answer = 'xy'
+        result = find_guarded_matches(strg)
+        self.failUnless(result==answer)
+
+    def test_no_match(self):
+        '''Test no matches in strg.'''
+        strg = "ooAaAxBBBooCCCyDdD"
+        answer = ''
+        result = find_guarded_matches(strg)
+        self.failUnless(result==answer)
 
 if __name__ == '__main__':
-    explore()
+    # A real app would use argparse to optionally exec the unit tests.
+    unittest.main()
 
