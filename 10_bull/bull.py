@@ -13,27 +13,27 @@ def look_and_say(seed):
     seq = str(seed)
     say = []
     last_first = ''
-    for j in xrange(0, len(seq)):
+    for j in range(0, len(seq)):
         first = seq[j]
         if first == last_first:
             continue
         rest = str(seq[j:])
         matches = re.search(r"^(%s+)" % first, rest)
         if not matches:
-            print("Error: no matches:", seed)
+            print(f"Error: no matches: {seed}")
             return
         this_match = matches.groups()[0]
         say.append(str(len(this_match)) + this_match[0])
         last_first = this_match[0]
-    #print(seed, '-->', say)
+    #print("{seed} --> {say}")
     return ''.join(say)
 
 def len_at_n_iters(iterations):
     '''Run through the n iterations.'''
     seed = 1
-    for i in xrange(0, iterations):
+    for i in range(0, iterations):
         seed = look_and_say(seed)
-        print(i, '-->', seed, '-->', len(seed))
+    print(f"Answer: {i} --> {seed} --> {len(seed)}")
 
 def explore():
     '''a = [1, 11, 21, 1211, 111221,'''
