@@ -13,8 +13,8 @@ def get_next_link(url, link):
     if response.status_code != 200:
         print("Error: Failed to get next nothing at %s%s" % (url, link))
         sys.exit(1)
-    content = response.content
-    # print('content:', content)
+    content = str(response.content)
+    print('content:', content)
 
     # Match 'nothing is <some number>'
     match = re.search('nothing is ([0-9]+)', content)
@@ -38,7 +38,7 @@ def explore():
     """Explore solution."""
     url = "http://www.pythonchallenge.com/pc/def/linkedlist.php?nothing="
     link = "12345"  # Start link from puzzle page.
-    for i in xrange(0, 400):  # See hints
+    for i in range(0, 400):  # See hints
         link = get_next_link(url, link)
 
 

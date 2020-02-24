@@ -3,6 +3,11 @@
 '''
 Find lower case characters surrounded by exactly three upper case
 characters on each side.
+
+For unittests, run script.
+For solution, run interactively:
+    >>> import equality
+    >>> equality.explore()
 '''
 
 import pprint
@@ -43,7 +48,7 @@ def find_guarded_matches(strg):
 def explore():
     '''Find the solution. Run iteractively.'''
     strg = file_to_string()
-    print find_guarded_matches(strg)
+    print(find_guarded_matches(strg))
 
 class EqualityTest(unittest.TestCase):
     '''Unit test set.'''
@@ -52,28 +57,28 @@ class EqualityTest(unittest.TestCase):
         strg = "AAAxBBBooCCCyDDDo"
         answer = 'xy'
         result = find_guarded_matches(strg)
-        self.failUnless(result==answer)
+        self.assertTrue(result==answer)
 
     def test_middle_match(self):
         '''Test match in middle of strg.'''
         strg = "mNoAAAxBBBooCCCyDDDmNo"
         answer = 'xy'
         result = find_guarded_matches(strg)
-        self.failUnless(result==answer)
+        self.assertTrue(result==answer)
 
     def test_end_match(self):
         '''Test match at end of strg.'''
         strg = "ooAAAxBBBooCCCyDDD"
         answer = 'xy'
         result = find_guarded_matches(strg)
-        self.failUnless(result==answer)
+        self.assertTrue(result == answer)
 
     def test_no_match(self):
         '''Test no matches in strg.'''
         strg = "ooAaAxBBBooCCCyDdD"
         answer = ''
         result = find_guarded_matches(strg)
-        self.failUnless(result==answer)
+        self.assertTrue(result==answer)
 
 if __name__ == '__main__':
     # A real app would use argparse to optionally exec the unit tests.

@@ -53,10 +53,10 @@ def explore(msg, shift):
     '''Find a solution.'''
     msg_shifted = ''.join([shift_ord(cha, shift) for cha in msg])
 
-    print '\nEncrypted message:'
-    print msg
-    print '\nDecrypted message:'
-    print msg_shifted
+    print('\nEncrypted message:')
+    print(msg)
+    print('\nDecrypted message:')
+    print(msg_shifted)
 
 if __name__ == '__main__':
     msg_orig = \
@@ -64,3 +64,6 @@ if __name__ == '__main__':
         "rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr" + \
         "ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj."
     explore(msg_orig, 2)
+
+    msg_url = "map"
+    explore(msg_url, 2)

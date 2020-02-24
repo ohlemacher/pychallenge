@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""pythonchallenge.com puzzle 4, peak"""
+"""pythonchallenge.com puzzle 5, peak"""
 
 from __future__ import print_function
 import requests
@@ -19,7 +19,11 @@ def main():
     if not response.status_code == 200:
         print('Error: Request for banner.p failed')
     else:
-        data = pickle.loads(response.text)
+
+        # string to bytes
+        text_in_bytes = response.text.encode('utf-8')
+
+        data = pickle.loads(text_in_bytes)
         for line in data:
             print(''.join([atom[0] * atom[1] for atom in line]))
 
