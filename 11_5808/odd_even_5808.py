@@ -15,8 +15,10 @@ def explore(fname):
     Throw away odd rows and odd columns.
     The answer is in what is left.
     """
+    # img is an ndarray.
     img = mh.imread(fname)
-    img_even = img[::2, ::2]
+
+    img_even = img[0::2, 0::2]
     pylab.imshow(img_even)
     pylab.show()
 
