@@ -9,7 +9,7 @@ import sys
 import requests
 import zipfile
 import re
-
+import pickle
 
 def get_zip_file(url, name):
     """Get the url file and write it to disk."""
@@ -18,50 +18,52 @@ def get_zip_file(url, name):
     if response.status_code != 200:
         print("Error: Failed to get channel.zip")
         sys.exit(1)
-    with open(name, 'w') as channel_zip:
+    with open(name, 'wb') as channel_zip:
         channel_zip.write(zip_data)
 
-def follow_file(zfile, name, comments=None):
+def follow_file(zfile, name):
     """
     Each file points to the next and has a comment.
     Collect the comment. Follow to the next file recursively.
     """
+    global comments
     # The first call, before the recursion starts, needs to create this list.
-    if comments is None:
-        comments = []
-
     try:
-        content = zfile.read(name)
-        comment = zfile.getinfo(name).comment
-        comments.append(comment)
+        print(f"== Examining {name}")
+        content = str(zfile.read(name))
+        comment = zfile.getinfo(name).comment.decode()
+
+        #print(f"content: {content}")
+        print(f"comment: {comment}")
 
         match = re.search('Next nothing is ([0-9]+)', content)
         if not match:
-            print('An interesting file was found:', name)
+            print(f'An interesting file was found: {name}')
             print(content)
             return
+        else:
+            comments += comment
 
-        next_file = match.group(1) + '.txt'
-        follow_file(zfile, next_file, comments)
+        next_file = f"{match.group(1)}.txt"
+        follow_file(zfile, next_file)
     except KeyError:
-        print('Error: Failed to read', name)
+        print(f'Error: Failed to read {name}')
         sys.exit(2)
-
-    return comments
 
 def explore():
     """Explore."""
     channel_name = 'channel.zip'
-    channel_url = 'http://www.pythonchallenge.com/pc/def/%s' % channel_name
+    channel_url = f"http://www.pythonchallenge.com/pc/def/{channel_name}"
 
     get_zip_file(channel_url, channel_name)
     zfile = zipfile.ZipFile(channel_name)
 
     follow_file(zfile, 'readme.txt')
 
-    comments = follow_file(zfile, '90052.txt')
-    print(''.join(comments))
+    follow_file(zfile, '90052.txt')
+    print(f"comments: \n{''.join(comments)}")
 
+comments = ""
 
 if __name__ == '__main__':
     explore()
