@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
-""" Solution to #7 oxygen at pythonchallenge.com """
+"""
+Solution to #7 oxygen at pythonchallenge.com
+
+Mac: `brew install freeimage`
+
+"""
 
 from __future__ import print_function
 import requests
@@ -11,9 +16,10 @@ import pprint
 def get_image(site, image_file):
     """Download the image."""
     response = requests.get('%s/%s' % (site, image_file))
+    print(f"status code: {response.status_code}")
     if response.status_code != 200:
         print('Error: get image failed.')
-    with open(image_file, 'w') as out:
+    with open(image_file, 'wb') as out:
         out.write(response.content)
 
 def explore_image(image_file):
@@ -29,15 +35,29 @@ def explore_image(image_file):
     shape = img.shape
     pprint.pprint(shape)
     values = []
-    for row in xrange(0, shape[0]):
-        for col in xrange(0, shape[1]):
+    for row in range(0, shape[0]):
+        for col in range(0, shape[1]):
             pixel = img[row, col]
             if pixel[0] == pixel[1] and pixel[1] == pixel[2]:
                 # pixel is gray
-                char = chr(pixel[1])
-                values.append(char)
+                if pixel[0] >=32 and pixel[0] <= 127:
+                    char = chr(pixel[0])
+                    values.append(char)
 
+    # Only use one of each repeated value (block of gray).
+    filtered_values = []
+    for i, v in enumerate(values):
+        if i == 0:
+            filtered_values.append(v)
+        elif v != values[i-1]:
+            filtered_values.append(v)
+
+    print("values:")
     pprint.pprint(''.join(values))
+
+    print("filtered values:")
+    pprint.pprint(''.join(filtered_values))
+
     # Answer:
     # smart guy, you made it. the next level is
     # [105, 110, 116, 101, 103, 114, 105, 116, 121]
@@ -45,7 +65,7 @@ def explore_image(image_file):
     # Make an ascii string
     answer = ''.join([chr(x) for x in
                       [105, 110, 116, 101, 103, 114, 105, 116, 121]])
-    print('answer:', answer)
+    print(f"answer: {answer}")
 
 def main():
     """
