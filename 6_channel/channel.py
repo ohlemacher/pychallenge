@@ -21,31 +21,34 @@ def get_zip_file(url, name):
     with open(name, 'wb') as channel_zip:
         channel_zip.write(zip_data)
 
-def follow_file(zfile, name):
+def follow_file(zfile, name, comments=None):
     """
     Each file points to the next and has a comment.
     Collect the comment. Follow to the next file recursively.
     """
-    global comments
+    if not comments:
+        comments = []
+
     # The first call, before the recursion starts, needs to create this list.
     try:
-        print(f"== Examining {name}")
+        #print(f"== Examining {name}")
         content = str(zfile.read(name))
         comment = zfile.getinfo(name).comment.decode()
 
         #print(f"content: {content}")
-        print(f"comment: {comment}")
+        #print(f"comment: {comment}")
 
         match = re.search('Next nothing is ([0-9]+)', content)
         if not match:
             print(f'An interesting file was found: {name}')
             print(content)
-            return
+            return comments
         else:
-            comments += comment
+            comments.append(comment)
 
         next_file = f"{match.group(1)}.txt"
-        follow_file(zfile, next_file)
+        follow_file(zfile, next_file, comments)
+        return comments
     except KeyError:
         print(f'Error: Failed to read {name}')
         sys.exit(2)
@@ -60,10 +63,9 @@ def explore():
 
     follow_file(zfile, 'readme.txt')
 
-    follow_file(zfile, '90052.txt')
+    comments = follow_file(zfile, '90052.txt')
     print(f"comments: \n{''.join(comments)}")
 
-comments = ""
 
 if __name__ == '__main__':
     explore()
