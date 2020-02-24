@@ -1,11 +1,16 @@
 #!/usr/bin/env python
-"""9: good"""
+"""
+9: good
+Look at url's source.  first and second coordinates are defined within.
+Draw the overlay image in purple.
+"""
 
 from __future__ import print_function
 import sys
 import requests
 import mahotas as mh
-import pylab
+#import pylab
+from matplotlib import pylab
 
 from PIL import Image, ImageDraw
 
@@ -18,7 +23,7 @@ def get_image(site, image_file):
     if response.status_code != 200:
         print('Error: get image failed:', response.status_code)
         return False
-    with open(image_file, 'w') as out:
+    with open(image_file, 'wb') as out:
         out.write(response.content)
     return True
 
@@ -60,16 +65,18 @@ def explore():
     second_list = [int(x) for x in second.split(',')]
 
     # Create lists of coordinates
-    first_line = zip(first_list[0::2], first_list[1::2])
-    second_line = zip(second_list[0::2], second_list[1::2])
+    first_line = list(zip(first_list[0::2], first_list[1::2]))
+    second_line = list(zip(second_list[0::2], second_list[1::2]))
+
+    print(f"first line: {first_line}")
 
     # Create something we can draw on
     img = Image.open('./good.jpg')
     draw = ImageDraw.Draw(img)
 
     # Draw lines on the image using the coordinates
-    draw.line(first_line, fill=(255, 0, 255), width=1)  # magenta body
-    draw.line(second_line, fill=(255, 0, 0), width=1)   # red head
+    draw.polygon(first_line, fill=(255, 0, 255), outline=(0,0,0))  # magenta body
+    draw.polygon(second_line, fill=(255, 0, 0), outline=(0,0,0))   # red head
 
     # Display the modified image.
     # fixme: show image without the save.
